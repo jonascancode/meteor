@@ -6,7 +6,7 @@ for ARGUMENT in "$@"; do
   KEY_LENGTH=${#KEY}
   VALUE="${ARGUMENT:$KEY_LENGTH+1}"
 
-  export "$KEY"="$VALUE"
+  export "$KEY=$VALUE"
 done
 
 echo "BRANCH_NAME = $BRANCH_NAME"

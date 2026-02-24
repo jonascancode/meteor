@@ -528,10 +528,12 @@ exports.execFileSync = function (file, args, opts) {
   try {
     result = child_process.execFileSync(file, args, opts);
   } catch (error) {
+    // If the error doesn't have stdout/stderr (e.g., EBADF, ENOENT),
+    // provide safe defaults
     return {
       success: false,
-      stdout: error.stdout,
-      stderr: error.stderr
+      stdout: error.stdout || '',
+      stderr: error.stderr || error.message || 'Command failed'
     };
   }
 
